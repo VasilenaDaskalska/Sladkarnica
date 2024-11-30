@@ -22,7 +22,7 @@ namespace Sladkarnica
         //Testing button remove when testing in done
         private void button1_Click(object sender, EventArgs e)
         {
-            //DateTime date = DateTime.Now;
+            DateTime date = DateTime.Now;
 
             //this.productGroupService.AddProductGroup("Test2");
             //this.productGroupService.UpdateProductGroupByID(1, "Test70");
@@ -33,6 +33,11 @@ namespace Sladkarnica
             // this.assortmentService.UpdateAssortmentByID("00B", "Test2", 2, "test2", (decimal)0.400, (decimal)2.50);
             //var res = this.assortmentService.DeleteAssortmentByID("00B");
             // Console.WriteLine(res);
+
+            //this.ordersService.AddOrder(date, "00A", false, 2);
+
+            //this.ordersService.UpdateOrderByID(1, date, "00A", false, 8);
+            //this.ordersService.DeleteOrderByID(3);
         }
     }
 }
