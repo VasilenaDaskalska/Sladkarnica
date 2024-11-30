@@ -11,5 +11,7 @@ namespace Sladkarnica.Services.Contracts
         bool UpdateClientByID(int clientID, string name, string adress, string phoneNumber);
 
         DataTable GetAllClients();
+
+        DataTable GetCustomersWithRevenueAbove1000(string sweetType);
     }
 }

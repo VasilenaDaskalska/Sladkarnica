@@ -68,5 +68,36 @@ namespace Sladkarnica.Services
 
             return this.dbHelper.ExecuteQuery(query);
         }
+
+        //Get client with revenue abouve 100
+        public DataTable GetCustomersWithRevenueAbove1000(string sweetType)
+        {
+            string query = @"
+            SELECT  
+                Client.ClientName AS Client, 
+                SUM([dbo].[Order].FinalPrice) AS Revenue
+            FROM 
+                ClientOrder 
+            JOIN 
+                Client ON ClientOrder.ClientID = Client.ClientID
+            JOIN  
+                [dbo].[Order] ON ClientOrder.OrderID = [dbo].[Order].OrderID
+            JOIN 
+                Assortment ON [dbo].[Order].AssortmentID = Assortment.AssortmentNumber
+            WHERE 
+                Assortment.AssortmentName = @SweetsType
+            GROUP BY 
+                Client.ClientName
+            HAVING 
+                SUM([dbo].[Order].FinalPrice) > 1000
+            ORDER BY  
+                Client.ClientName;";
+
+            SqlParameter[] parameters = {
+        new SqlParameter("@SweetsType", SqlDbType.NVarChar) { Value = sweetType }
+    };
+
+            return this.dbHelper.ExecuteQuery(query, parameters); // Изпълняваме заявката и връщаме резултата
+        }
     }
 }

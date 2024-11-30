@@ -37,7 +37,7 @@ namespace Sladkarnica
             // Console.WriteLine(res);
 
             //this.ordersService.AddOrder(date, "00A", false, 2);
-            //this.ordersService.AddOrder(date.AddDays(1), "00A", false, 4, 2);
+            //this.ordersService.AddOrder(date.AddDays(1), "00A", false, 1000, 2);
             //this.ordersService.AddOrder(date, "00A", false, 6);
             //this.ordersService.UpdateOrderByID(1, date, "00A", false, 8);
             //this.ordersService.DeleteOrderByID(3);
@@ -51,7 +51,10 @@ namespace Sladkarnica
             //this.clientService.UpdateClientByID(1, "pesho", "sds", "323223");
 
             //this.clientService.DeleteClientByID(1);
-            //var res = this.productGroupService.GetAllProductGroups();
+            //var res = this.clientService.GetCustomersWithRevenueAbove1000("Test1");
+            //this.dataGridView1.DataSource = res;
+
+            //var res = this.ordersService.GetAllOrders();
             //this.dataGridView1.DataSource = res;
 
         }
