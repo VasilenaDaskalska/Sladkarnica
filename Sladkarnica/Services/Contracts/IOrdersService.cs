@@ -14,5 +14,7 @@ namespace Sladkarnica.Services.Contracts
         DataTable GetOrdersByDate(DateTime date);
 
         DataTable GetRevenueByPeriod(DateTime startDate, DateTime endDate);
+
+        DataTable GetAllOrders();
     }
 }

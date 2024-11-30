@@ -51,6 +51,9 @@ namespace Sladkarnica
             //this.clientService.UpdateClientByID(1, "pesho", "sds", "323223");
 
             //this.clientService.DeleteClientByID(1);
+            //var res = this.productGroupService.GetAllProductGroups();
+            //this.dataGridView1.DataSource = res;
+
         }
     }
 }

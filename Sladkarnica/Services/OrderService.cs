@@ -115,5 +115,13 @@ namespace Sladkarnica.Services
 
             return this.dbHelper.ExecuteQuery(query, parameters);
         }
+
+        //Get all orders
+        public DataTable GetAllOrders()
+        {
+            string query = "SELECT * FROM [dbo].[Order]";
+
+            return this.dbHelper.ExecuteQuery(query);
+        }
     }
 }

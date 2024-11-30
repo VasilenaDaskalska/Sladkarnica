@@ -1,4 +1,6 @@
-﻿namespace Sladkarnica.Services.Contracts
+﻿using System.Data;
+
+namespace Sladkarnica.Services.Contracts
 {
     public interface IProductGroupService
     {
@@ -9,5 +11,7 @@
         bool UpdateProductGroupByName(string groupName, string newName);
 
         bool DeleteProductGroupByID(int groupId);
+
+        DataTable GetAllProductGroups();
     }
 }

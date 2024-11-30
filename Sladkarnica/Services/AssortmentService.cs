@@ -66,5 +66,13 @@ namespace Sladkarnica.Services
 
             return rowsAffected > 0;
         }
+
+        //Get all assortments
+        public DataTable GetAllAssortments()
+        {
+            string query = "SELECT * FROM Assortment";
+
+            return this.dbHelper.ExecuteQuery(query);
+        }
     }
 }

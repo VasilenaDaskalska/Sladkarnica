@@ -60,5 +60,13 @@ namespace Sladkarnica.Services
 
             return rowsAffected > 0;
         }
+
+        //Get all clients
+        public DataTable GetAllClients()
+        {
+            string query = "SELECT * FROM Client";
+
+            return this.dbHelper.ExecuteQuery(query);
+        }
     }
 }

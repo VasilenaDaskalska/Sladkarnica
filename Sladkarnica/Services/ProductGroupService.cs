@@ -69,5 +69,13 @@ namespace Sladkarnica.Services
 
             return rowsAffected > 0;
         }
+
+        //Get all groups
+        public DataTable GetAllProductGroups()
+        {
+            string query = "SELECT * FROM ProductGroup";
+
+            return this.dbHelper.ExecuteQuery(query);
+        }
     }
 }
