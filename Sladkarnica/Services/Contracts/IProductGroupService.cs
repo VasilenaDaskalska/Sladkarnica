@@ -13,5 +13,7 @@ namespace Sladkarnica.Services.Contracts
         bool DeleteProductGroupByID(int groupId);
 
         DataTable GetAllProductGroups();
+
+        DataTable GetMonthlyProfitData();
     }
 }

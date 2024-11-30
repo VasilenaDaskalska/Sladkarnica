@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Data;
+using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using Sladkarnica.Services;
 using Sladkarnica.Services.Contracts;
 
@@ -18,6 +21,8 @@ namespace Sladkarnica
             this.assortmentService = new AssortmentService();
             this.ordersService = new OrderService();
             this.clientService = new ClientService();
+            this.InitializeChart();
+            this.DrawCharts();
             this.InitializeComponent();
         }
 
@@ -57,6 +62,57 @@ namespace Sladkarnica
             //var res = this.ordersService.GetAllOrders();
             //this.dataGridView1.DataSource = res;
 
+            var res = this.productGroupService.GetMonthlyProfitData();
+            this.dataGridView1.DataSource = res;
+
+        }
+
+        private void DrawCharts()
+        {
+            DataTable data = this.productGroupService.GetMonthlyProfitData();
+
+            var groups = data.AsEnumerable()
+                             .GroupBy(row => row.Field<string>("Sweets_Group"));
+
+            foreach (var group in groups)
+            {
+                Series series = new Series(group.Key);
+                series.ChartType = SeriesChartType.Line;
+
+                foreach (var row in group)
+                {
+                    int year = row.Field<int>("Year");
+                    int month = row.Field<int>("Month");
+                    decimal profit = row.Field<decimal>("Profit");
+
+                    series.Points.AddXY($"{year}-{month:00}", profit);
+                }
+
+                this.chart1.Series.Add(series);
+            }
+
+            // Настройки на осите
+            this.chart1.ChartAreas[0].AxisX.Title = "Month (Year)";
+            this.chart1.ChartAreas[0].AxisX.Interval = 1;
+            this.chart1.ChartAreas[0].AxisY.Title = "Profit (BGN)";
+        }
+
+        private void InitializeChart()
+        {
+            // Initialize the Chart control
+            this.chart1 = new Chart
+            {
+                Location = new System.Drawing.Point(12, 12),
+                Size = new System.Drawing.Size(800, 400),
+                Name = "chart1"
+            };
+
+            // Add a ChartArea to the Chart
+            ChartArea chartArea = new ChartArea("Default");
+            this.chart1.ChartAreas.Add(chartArea);
+
+            // Add the Chart to the Form's Controls
+            this.Controls.Add(this.chart1);
         }
     }
 }

@@ -77,5 +77,27 @@ namespace Sladkarnica.Services
 
             return this.dbHelper.ExecuteQuery(query);
         }
+
+        public DataTable GetMonthlyProfitData()
+        {
+            string query = @"
+        SELECT 
+            pg.GroupName AS Sweets_Group,
+            YEAR(o.OrderDate) AS Year,
+            MONTH(o.OrderDate) AS Month,
+            SUM(o.FinalPrice) AS Profit
+        FROM 
+            [dbo].[Order] o
+        JOIN 
+            [dbo].[Assortment] a ON o.AssortmentID = a.AssortmentNumber
+        JOIN 
+            [dbo].[ProductGroup] pg ON a.GroupID = pg.GroupNumber
+        GROUP BY 
+            pg.GroupName, YEAR(o.OrderDate), MONTH(o.OrderDate)
+        ORDER BY 
+            pg.GroupName, Year, Month;";
+
+            return this.dbHelper.ExecuteQuery(query);
+        }
     }
 }
