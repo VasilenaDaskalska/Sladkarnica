@@ -8,5 +8,7 @@ namespace Sladkarnica.DataBase.Contracts
         int ExecuteNonQuery(string query, SqlParameter[] parameters = null);
 
         DataTable ExecuteQuery(string query, SqlParameter[] parameters = null);
+
+        object ExecuteScalar(string query, SqlParameter[] parameters = null);
     }
 }

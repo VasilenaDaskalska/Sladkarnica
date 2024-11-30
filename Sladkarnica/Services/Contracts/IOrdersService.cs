@@ -5,7 +5,7 @@ namespace Sladkarnica.Services.Contracts
 {
     public interface IOrdersService
     {
-        void AddOrder(DateTime date, string assortmentID, bool isReady, int quantity);
+        void AddOrder(DateTime date, string assortmentID, bool isReady, int quantity, int clientID);
 
         bool DeleteOrderByID(int groupId);
 

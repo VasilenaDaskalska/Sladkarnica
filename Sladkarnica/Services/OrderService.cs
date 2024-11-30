@@ -17,7 +17,7 @@ namespace Sladkarnica.Services
         }
 
         //Insert method for Orders
-        public void AddOrder(DateTime date, string assortmentID, bool isReady, int quantity)
+        public void AddOrder(DateTime date, string assortmentID, bool isReady, int quantity, int clientID)
         {
             string query = "INSERT INTO [dbo].[Order] (OrderDate, AssortmentID, Crafting, Quantity) VALUES (@OrderDate, @AssortmentID, @Crafting, @Quantity)";
             SqlParameter[] parameters = {
@@ -26,7 +26,25 @@ namespace Sladkarnica.Services
             new SqlParameter("@Crafting", SqlDbType.Bit) { Value = isReady },
             new SqlParameter("@Quantity", SqlDbType.Int) { Value = quantity },
         };
-            this.dbHelper.ExecuteNonQuery(query, parameters);
+            int rowsAffected = this.dbHelper.ExecuteNonQuery(query, parameters);
+
+            if (rowsAffected > 0)
+            {
+                // Get ID on last order
+                string selectLastOrderQuery = "select [Order].OrderID from [Order] order by OrderID DESC;";
+                var lastInsertedID = this.dbHelper.ExecuteScalar(selectLastOrderQuery);
+
+                //Insert into ClientOrder
+                string insertClientOrderQuery = "INSERT INTO ClientOrder (ClientID, OrderID) " +
+                                                "VALUES (@ClientID, @OrderID);";
+
+                SqlParameter[] clientOrderParameters = {
+                new SqlParameter("@ClientID", SqlDbType.Int) { Value = clientID },
+                new SqlParameter("@OrderID", SqlDbType.Int) { Value = lastInsertedID }
+            };
+
+                this.dbHelper.ExecuteNonQuery(insertClientOrderQuery, clientOrderParameters);
+            }
         }
 
         //Update method for Orders by ID

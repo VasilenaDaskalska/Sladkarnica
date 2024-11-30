@@ -48,5 +48,23 @@ namespace Sladkarnica.DataBase
                 }
             }
         }
+
+        // Method for queries that returns only one res
+        public object ExecuteScalar(string query, SqlParameter[] parameters = null)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+
+                    connection.Open();
+                    return command.ExecuteScalar();
+                }
+            }
+        }
     }
 }
