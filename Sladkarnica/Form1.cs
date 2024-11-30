@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Windows.Forms;
 using Sladkarnica.Services;
 using Sladkarnica.Services.Contracts;
@@ -35,9 +36,13 @@ namespace Sladkarnica
             // Console.WriteLine(res);
 
             //this.ordersService.AddOrder(date, "00A", false, 2);
-
+            //this.ordersService.AddOrder(date.AddDays(1), "00A", false, 4);
+            //this.ordersService.AddOrder(date, "00A", false, 6);
             //this.ordersService.UpdateOrderByID(1, date, "00A", false, 8);
             //this.ordersService.DeleteOrderByID(3);
+
+            DataTable res = this.ordersService.GetRevenueByPeriod(date, date.AddDays(1));
+            this.dataGridView1.DataSource = res;
         }
     }
 }

@@ -60,5 +60,42 @@ namespace Sladkarnica.Services
             return rowsAffected > 0;
         }
 
+        //Get orders by date
+        public DataTable GetOrdersByDate(DateTime date)
+        {
+            string query = "SELECT [dbo].[Order].OrderID, [dbo].[Order].OrderDate, [dbo].[Assortment].AssortmentName " +
+                           "AS Assortment, [dbo].[Order].Quantity, [dbo].[Order].FinalPrice " +
+                           "FROM [dbo].[Order] " +
+                           "JOIN [dbo].[Assortment] ON [dbo].[Order].AssortmentID = [dbo].[Assortment].AssortmentNumber " +
+                           "WHERE [dbo].[Order].OrderDate = @OrderDate " +
+                           "ORDER BY [dbo].[Order].OrderID";
+
+            SqlParameter[] parameters = {
+            new SqlParameter("@OrderDate", SqlDbType.Date) { Value = date }
+        };
+
+            return this.dbHelper.ExecuteQuery(query, parameters);
+        }
+
+        //Get revenue for period
+        public DataTable GetRevenueByPeriod(DateTime startDate, DateTime endDate)
+        {
+            string query = "SELECT [dbo].[ProductGroup].GroupName AS ProductGroup," +
+                           "[dbo].[Assortment].AssortmentName AS Assortment, " +
+                           "SUM([dbo].[Order].FinalPrice) AS Revenue " +
+                           "FROM [dbo].[Order] " +
+                           "JOIN [dbo].[Assortment] ON [dbo].[Order].AssortmentID = [dbo].[Assortment].AssortmentNumber " +
+                           "JOIN [dbo].[ProductGroup] ON [dbo].[Assortment].GroupID = [dbo].[ProductGroup].GroupNumber " +
+                           "WHERE [dbo].[Order].OrderDate BETWEEN @startDate AND @endDate " +
+                           "GROUP BY [dbo].[ProductGroup].GroupName, [dbo].[Assortment].AssortmentName " +
+                           "ORDER BY [dbo].[ProductGroup].GroupName, [dbo].[Assortment].AssortmentName";
+
+            SqlParameter[] parameters = {
+            new SqlParameter("@startDate", SqlDbType.Date) { Value = startDate },
+            new SqlParameter("@endDate", SqlDbType.Date) { Value = endDate }
+        };
+
+            return this.dbHelper.ExecuteQuery(query, parameters);
+        }
     }
 }
