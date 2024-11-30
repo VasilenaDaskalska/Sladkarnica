@@ -1,9 +1,10 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using Sladkarnica.DataBase.Contracts;
 
-namespace Sladkarnica
+namespace Sladkarnica.DataBase
 {
-    public class DatabaseHelper
+    public class DatabaseHelper : IDataBaseHelper
     {
         private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\PC\Desktop\Sladkarnica\Sladkarnica\Sladkarnica\BakeryDB.mdf;Integrated Security=True";
 

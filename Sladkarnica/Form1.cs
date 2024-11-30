@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Windows.Forms;
+using Sladkarnica.Services;
+using Sladkarnica.Services.Contracts;
 
 namespace Sladkarnica
 {
     public partial class Form1 : Form
     {
-        private SqlCommandsHelper helper = new SqlCommandsHelper();
+        private IProductGroupService productGroupService;
 
         public Form1()
         {
+            this.productGroupService = new ProductGroupService();
             this.InitializeComponent();
         }
 
@@ -19,6 +22,10 @@ namespace Sladkarnica
             // helper.AddAssortment("00A", "Test1", 1, "test1", (decimal)0.100, (decimal)1.50);
             //DateTime date = DateTime.Now;
             //helper.AddOrder(date, "00A", false, 3);
+            //this.productGroupService.AddProductGroup("Test2");
+            //this.productGroupService.UpdateProductGroupByID(1, "Test70");
+            // this.productGroupService.UpdateProductGroupByName("Test2", "Test80");
+            // this.productGroupService.DeleteProductGroupByID(4);
         }
     }
 }
