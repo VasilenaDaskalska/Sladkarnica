@@ -56,7 +56,7 @@ namespace Sladkarnica
             this.chart1 = new Chart
             {
                 Location = new System.Drawing.Point(12, 12),
-                Size = new System.Drawing.Size(600, 400),
+                Size = new System.Drawing.Size(800, 500),
                 Name = "chart1",
             };
 
@@ -66,6 +66,11 @@ namespace Sladkarnica
 
             // Add the Chart to the Form's Controls
             this.Controls.Add(this.chart1);
+        }
+
+        private void chart1_Click(object sender, System.EventArgs e)
+        {
+
         }
     }
 }
