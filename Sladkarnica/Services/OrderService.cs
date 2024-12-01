@@ -65,16 +65,27 @@ namespace Sladkarnica.Services
         }
 
         // Method for deleting orders by ID
-        public bool DeleteOrderByID(int groupId)
+        public bool DeleteOrderByID(int orderId)
         {
-            string query = "DELETE FROM [dbo].[Order] WHERE OrderID = @OrderID";
+            int rowsAffected = 0;
+            string query2 = "DELETE FROM [dbo].[ClientOrder] WHERE OrderID = @OrderID";
 
-            SqlParameter[] parameters = {
-            new SqlParameter("@OrderID", SqlDbType.Int) { Value = groupId }
-        };
+            SqlParameter[] parameters2 = {
+            new SqlParameter("@OrderID", SqlDbType.Int) { Value = orderId }
+            };
 
-            int rowsAffected = this.dbHelper.ExecuteNonQuery(query, parameters);
+            rowsAffected = this.dbHelper.ExecuteNonQuery(query2, parameters2);
 
+            if (rowsAffected > 0)
+            {
+                string query = "DELETE FROM [dbo].[Order] WHERE OrderID = @OrderID";
+
+                SqlParameter[] parameters = {
+            new SqlParameter("@OrderID", SqlDbType.Int) { Value = orderId }
+            };
+
+                rowsAffected = this.dbHelper.ExecuteNonQuery(query, parameters);
+            }
             return rowsAffected > 0;
         }
 

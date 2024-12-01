@@ -21,8 +21,8 @@ namespace Sladkarnica
             this.assortmentService = new AssortmentService();
             this.ordersService = new OrderService();
             this.clientService = new ClientService();
-            this.InitializeChart();
-            this.DrawCharts();
+            // this.InitializeChart();
+            //this.DrawCharts();
             this.InitializeComponent();
         }
 
@@ -31,7 +31,7 @@ namespace Sladkarnica
         {
             DateTime date = DateTime.Now;
 
-            //this.productGroupService.AddProductGroup("Test2");
+            this.productGroupService.AddProductGroup("Test2");
             //this.productGroupService.UpdateProductGroupByID(1, "Test70");
             // this.productGroupService.UpdateProductGroupByName("Test2", "Test80");
             // this.productGroupService.DeleteProductGroupByID(4);
@@ -62,8 +62,8 @@ namespace Sladkarnica
             //var res = this.ordersService.GetAllOrders();
             //this.dataGridView1.DataSource = res;
 
-            var res = this.productGroupService.GetMonthlyProfitData();
-            this.dataGridView1.DataSource = res;
+            //var res = this.productGroupService.GetMonthlyProfitData();
+            //this.dataGridView1.DataSource = res;
 
         }
 
@@ -113,6 +113,47 @@ namespace Sladkarnica
 
             // Add the Chart to the Form's Controls
             this.Controls.Add(this.chart1);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ProductGroup product = new ProductGroup();
+            product.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Client client = new Client();
+            client.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Assortment assortment = new Assortment();
+            assortment.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Order order = new Order();
+            order.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Info info = new Info();
+            info.Show();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            ChartForma chartForm = new ChartForma();
+            chartForm.Show();
         }
     }
 }

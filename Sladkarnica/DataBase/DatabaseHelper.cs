@@ -6,7 +6,8 @@ namespace Sladkarnica.DataBase
 {
     public class DatabaseHelper : IDataBaseHelper
     {
-        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\PC\Desktop\Sladkarnica\Sladkarnica\Sladkarnica\BakeryDB.mdf;Integrated Security=True";
+        // private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\PC\Desktop\Sladkarnica\Sladkarnica\Sladkarnica\BakeryDB.mdf;Integrated Security=True";
+        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Тиха\Desktop\Sladkarnica\Sladkarnica\BakeryDB.mdf;Integrated Security=True;";
 
         // Methot for executing select queries (SELECT)
         public DataTable ExecuteQuery(string query, SqlParameter[] parameters = null)

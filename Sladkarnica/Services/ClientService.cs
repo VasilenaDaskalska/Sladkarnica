@@ -69,7 +69,7 @@ namespace Sladkarnica.Services
             return this.dbHelper.ExecuteQuery(query);
         }
 
-        //Get client with revenue abouve 100
+        //Get client with revenue abouve 1000
         public DataTable GetCustomersWithRevenueAbove1000(string sweetType)
         {
             string query = @"
@@ -97,7 +97,7 @@ namespace Sladkarnica.Services
         new SqlParameter("@SweetsType", SqlDbType.NVarChar) { Value = sweetType }
     };
 
-            return this.dbHelper.ExecuteQuery(query, parameters); // Изпълняваме заявката и връщаме резултата
+            return this.dbHelper.ExecuteQuery(query, parameters);
         }
     }
 }
